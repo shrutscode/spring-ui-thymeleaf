@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"> 
+
+<head>
+      <title>Spring Boot 1</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="stylesheet" href="http://cdn.jsdelivr.net/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<div class="container">
+  <h2>Assignment Spring Boot</h2>
+  <form class="form-horizontal" action="#" th:action="@{/}" th:object="${frm}" method="POST">
+  
+  				<div class="form-group">
+  						<div class=row>	  					
+	                    	<label class="control-label col-sm-2" for="startDt">Start Date</label>
+	                    	 <div class="col-sm-3">	                    
+	                    		<input type="date"	 
+	                    		id="startDt"                          
+	                           th:field="*{startDate}" 
+	                           class="form-control"
+	                           autofocus="autofocus"
+	                           placeholder="Start Date">
+	                           
+	                           	<span th:if="${#fields.hasErrors('startDate')}" class="text-danger" th:errors="*{startDate}"></span>
+	                     	</div>
+	                     </div>
+                </div>                
+                <div class="form-group">
+                <div class=row>
+                	<label class="control-label col-sm-2" for="endDt">End Date</label>                   
+                    <div class="col-sm-3">
+                    	<input type="date"
+                           id="endDt"                           
+                           th:field="*{endDate}" 
+                           class="form-control"
+                           placeholder="End Date">
+                           <span th:if="${#fields.hasErrors('endDate')}" class="text-danger" th:errors="*{endDate}"></span>
+                     </div>
+                    
+                      <div><p class="form-group input-group" th:if="${invalidDate}" th:text="${errMessage}"></div>
+                      
+                     
+                </div>
+                
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <input type="submit"
+                                   name="login-submit"
+                                   id="login-submit"
+                                   class="form-control btn btn-info"
+                                   value="Confirm">
+                        </div>
+                    </div>
+                </div>
+                
+                <div th:if="${showRangeMsg}">
+		              <ul th:if="${#fields.hasErrors('global')}">
+						  <li th:each="err : ${#fields.errors('global')}" th:text="${err}" class="text-danger">Input is incorrect</li>
+						</ul>
+				</div>
+              <div th:if="${dateDiff>=0}" >Number of days between the two dates is: <p class="form-group input-group" th:text="${dateDiff}"></div> 
+                
+            </form> 
+            
+            
+                    
+</div>
+</body>
+</html>
+  
